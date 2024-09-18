@@ -38,7 +38,7 @@ $RECYCLE.BIN/
 #-------------------------
 # Environment Files
 #-------------------------
-env
+.env
 # These should never be under version control,
 # as it poses a security risk.
 
