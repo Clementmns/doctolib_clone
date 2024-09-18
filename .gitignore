@@ -1,7 +1,6 @@
 #-------------------------
 # Operating Specific Junk Files
 #-------------------------
-
 # OS X
 .DS_Store
 .AppleDouble
@@ -39,6 +38,7 @@ $RECYCLE.BIN/
 #-------------------------
 # Environment Files
 #-------------------------
+env
 # These should never be under version control,
 # as it poses a security risk.
 
