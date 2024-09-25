@@ -19,7 +19,7 @@ class Etablishments extends BaseController {
         $totalEtablishments = $model->countAllResults();
 
         // Charger la bibliothèque de pagination de CodeIgniter
-        $pager = \Config\Services::pager();
+        $pager = \Config\Services::pager(); 
 
         $data = [
             'etablishments' => $etablishments,

@@ -7,7 +7,6 @@ use CodeIgniter\Model;
 class EtablishmentsModel extends Model
 {
     protected $table = 'etablishment'; // Le nom de ta table d'établissements
-    protected $primaryKey = 'id_etablishment'; // Ta clé primaire
 
     public function getEtablishments($page = 1, $perPage = 10)
     {
