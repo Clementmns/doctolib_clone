@@ -21,7 +21,7 @@
                 Affichage de la liste des spécialités
             </li>
             <li>
-                Affichage de la liste des établissements
+               <a href="etablishments/"> Affichage de la liste des établissements</a>
             </li>
 
         </ul>
