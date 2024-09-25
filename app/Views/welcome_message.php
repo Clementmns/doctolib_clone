@@ -1,6 +1,5 @@
 <!doctype html>
 <html lang="fr">
-
 <head>
     <meta charset="utf-8">
     <title>Index des pages PHP pour accéder à la BDD</title>
