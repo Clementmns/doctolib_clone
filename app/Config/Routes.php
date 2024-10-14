@@ -6,19 +6,19 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 
-// HOME
+// ACCUEIL
 $routes->get('/', 'Home::index');
 
 // PATIENTS
 $routes->get('patients', 'Patients::index');
 
-// ETABLISSEMENTS
+// ÉTABLISSEMENTS
 $routes->get('etablishments', 'Etablishments::index');
 
-//SPECIALITES
+//SPÉCIALITÉS
 $routes->get('specialities', 'Specialities::index');
 
-// PRACTITIONERS
+// PRATICIENS
 $routes->get('practitioners', 'Practitioner::index');
 $routes->get('practitioners/new', 'Practitioner::addView');
 $routes->post('practitioners/create', 'Practitioner::create');

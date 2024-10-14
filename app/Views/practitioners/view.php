@@ -1,5 +1,3 @@
-<h2><?= esc($title) ?></h2>
-
 <a href="practitioners/new"><button>Ajouter un praticien</button></a>
 <table border="1" cellpadding="10" cellspacing="0">
     <thead>

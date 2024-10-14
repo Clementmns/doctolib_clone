@@ -35,6 +35,9 @@ class Practitioner extends BaseController {
         return view('practitioners/add_practitioner');
     }
 
+    /**
+     * @throws \ReflectionException
+     */
     public function create(): string|\CodeIgniter\HTTP\RedirectResponse
     {
         $validation = \Config\Services::validation();
