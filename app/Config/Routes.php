@@ -5,12 +5,10 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
-
-// HOME
 $routes->get('/', 'Home::index');
-
-// PATIENTS
 $routes->get('patients', 'Patients::index');
+$routes->get('etablishments', 'Etablishments::index');
+$routes->get('specialites', 'Specialites::index');
 
 // PRACTITIONERS
 $routes->get('practitioners', 'Practitioner::index');
