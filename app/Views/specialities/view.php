@@ -5,10 +5,10 @@
         </tr>
     </thead>
     <tbody>
-        <?php if (!empty($specialites) && is_array($specialites)): ?>
-            <?php foreach ($specialites as $specialite): ?>
+        <?php if (!empty($specialities) && is_array($specialities)): ?>
+            <?php foreach ($specialities as $speciality): ?>
                 <tr>
-                    <td><?= esc($specialite['description']) ?></td>
+                    <td><?= esc($speciality['description']) ?></td>
                 </tr>
             <?php endforeach; ?>
         <?php else: ?>

@@ -2,20 +2,20 @@
 
 namespace App\Controllers;
 
-use App\Models\SpecialitesModel;
+use App\Models\SpecialitiesModel;
 
-class Specialites extends BaseController
+class Specialities extends BaseController
 {
     public function index(): void
     {
-        $model = model(SpecialitesModel::class);
+        $model = model(SpecialitiesModel::class);
 
         $perPage = 10; // Nombre d'éléments par page
-        $specialites = $model->paginate($perPage); // Récupère les spécialités paginées
+        $specialities = $model->paginate($perPage); // Récupère les spécialités paginées
         $pager = $model->pager; // Génère la pagination
 
         $data = [
-            'specialites' => $specialites,
+            'specialities' => $specialities,
             'title' => "Visualisation de toutes les spécialités de la BDD",
             'pager' => $pager,
         ];

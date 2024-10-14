@@ -4,7 +4,7 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class SpecialitesModel extends Model
+class SpecialitiesModel extends Model
 {
     protected $table = 'speciality';
     protected $allowedFields = ['description']; // Spécifie les champs que tu veux manipuler

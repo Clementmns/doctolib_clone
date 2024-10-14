@@ -16,7 +16,7 @@ $routes->get('patients', 'Patients::index');
 $routes->get('etablishments', 'Etablishments::index');
 
 //SPECIALITES
-$routes->get('specialites', 'Specialites::index');
+$routes->get('specialities', 'Specialities::index');
 
 // PRACTITIONERS
 $routes->get('practitioners', 'Practitioner::index');
