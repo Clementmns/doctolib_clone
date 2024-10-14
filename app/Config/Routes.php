@@ -5,9 +5,17 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
+
+// HOME
 $routes->get('/', 'Home::index');
+
+// PATIENTS
 $routes->get('patients', 'Patients::index');
+
+// ETABLISSEMENTS
 $routes->get('etablishments', 'Etablishments::index');
+
+//SPECIALITES
 $routes->get('specialites', 'Specialites::index');
 
 // PRACTITIONERS
