@@ -1,355 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Welcome to CodeIgniter 4!</title>
-    <meta name="description" content="The small framework with powerful features">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" type="image/png" href="/favicon.ico">
-
-    <!-- STYLES -->
-
-    <style {csp-style-nonce}>
-        * {
-            transition: background-color 300ms ease, color 300ms ease;
-        }
-        *:focus {
-            background-color: rgba(221, 72, 20, .2);
-            outline: none;
-        }
-        html, body {
-            color: rgba(33, 37, 41, 1);
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
-            font-size: 16px;
-            margin: 0;
-            padding: 0;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            text-rendering: optimizeLegibility;
-        }
-        header {
-            background-color: rgba(247, 248, 249, 1);
-            padding: .4rem 0 0;
-        }
-        .menu {
-            padding: .4rem 2rem;
-        }
-        header ul {
-            border-bottom: 1px solid rgba(242, 242, 242, 1);
-            list-style-type: none;
-            margin: 0;
-            overflow: hidden;
-            padding: 0;
-            text-align: right;
-        }
-        header li {
-            display: inline-block;
-        }
-        header li a {
-            border-radius: 5px;
-            color: rgba(0, 0, 0, .5);
-            display: block;
-            height: 44px;
-            text-decoration: none;
-        }
-        header li.menu-item a {
-            border-radius: 5px;
-            margin: 5px 0;
-            height: 38px;
-            line-height: 36px;
-            padding: .4rem .65rem;
-            text-align: center;
-        }
-        header li.menu-item a:hover,
-        header li.menu-item a:focus {
-            background-color: rgba(221, 72, 20, .2);
-            color: rgba(221, 72, 20, 1);
-        }
-        header .logo {
-            float: left;
-            height: 44px;
-            padding: .4rem .5rem;
-        }
-        header .menu-toggle {
-            display: none;
-            float: right;
-            font-size: 2rem;
-            font-weight: bold;
-        }
-        header .menu-toggle button {
-            background-color: rgba(221, 72, 20, .6);
-            border: none;
-            border-radius: 3px;
-            color: rgba(255, 255, 255, 1);
-            cursor: pointer;
-            font: inherit;
-            font-size: 1.3rem;
-            height: 36px;
-            padding: 0;
-            margin: 11px 0;
-            overflow: visible;
-            width: 40px;
-        }
-        header .menu-toggle button:hover,
-        header .menu-toggle button:focus {
-            background-color: rgba(221, 72, 20, .8);
-            color: rgba(255, 255, 255, .8);
-        }
-        header .heroe {
-            margin: 0 auto;
-            max-width: 1100px;
-            padding: 1rem 1.75rem 1.75rem 1.75rem;
-        }
-        header .heroe h1 {
-            font-size: 2.5rem;
-            font-weight: 500;
-        }
-        header .heroe h2 {
-            font-size: 1.5rem;
-            font-weight: 300;
-        }
-        section {
-            margin: 0 auto;
-            max-width: 1100px;
-            padding: 2.5rem 1.75rem 3.5rem 1.75rem;
-        }
-        section h1 {
-            margin-bottom: 2.5rem;
-        }
-        section h2 {
-            font-size: 120%;
-            line-height: 2.5rem;
-            padding-top: 1.5rem;
-        }
-        section pre {
-            background-color: rgba(247, 248, 249, 1);
-            border: 1px solid rgba(242, 242, 242, 1);
-            display: block;
-            font-size: .9rem;
-            margin: 2rem 0;
-            padding: 1rem 1.5rem;
-            white-space: pre-wrap;
-            word-break: break-all;
-        }
-        section code {
-            display: block;
-        }
-        section a {
-            color: rgba(221, 72, 20, 1);
-        }
-        section svg {
-            margin-bottom: -5px;
-            margin-right: 5px;
-            width: 25px;
-        }
-        .further {
-            background-color: rgba(247, 248, 249, 1);
-            border-bottom: 1px solid rgba(242, 242, 242, 1);
-            border-top: 1px solid rgba(242, 242, 242, 1);
-        }
-        .further h2:first-of-type {
-            padding-top: 0;
-        }
-        .svg-stroke {
-            fill: none;
-            stroke: #000;
-            stroke-width: 32px;
-        }
-        footer {
-            background-color: rgba(221, 72, 20, .8);
-            text-align: center;
-        }
-        footer .environment {
-            color: rgba(255, 255, 255, 1);
-            padding: 2rem 1.75rem;
-        }
-        footer .copyrights {
-            background-color: rgba(62, 62, 62, 1);
-            color: rgba(200, 200, 200, 1);
-            padding: .25rem 1.75rem;
-        }
-        @media (max-width: 629px) {
-            header ul {
-                padding: 0;
-            }
-            header .menu-toggle {
-                padding: 0 1rem;
-            }
-            header .menu-item {
-                background-color: rgba(244, 245, 246, 1);
-                border-top: 1px solid rgba(242, 242, 242, 1);
-                margin: 0 15px;
-                width: calc(100% - 30px);
-            }
-            header .menu-toggle {
-                display: block;
-            }
-            header .hidden {
-                display: none;
-            }
-            header li.menu-item a {
-                background-color: rgba(221, 72, 20, .1);
-            }
-            header li.menu-item a:hover,
-            header li.menu-item a:focus {
-                background-color: rgba(221, 72, 20, .7);
-                color: rgba(255, 255, 255, .8);
-            }
-        }
-    </style>
-</head>
-<body>
-
 <header>
     <h1>Liste des fonctionnalités de "Mon Doctolib"</h1>
 </header>
 <ul>
-    <header>
-        <h1>Liste des fonctionnalités de "Mon Doctolib"</h1>
-    </header>
-    <ul>
 
     <li><b>Consultations simples de la BDD (tables sans clés étrangères)</b>
         <ul>
-            <li>
-                <a href="patients/">Affichage de la liste des patients</a>
-            </li>
-            <li>
-                Affichage de la liste des spécialités
-            </li>
-            <li>
-                Affichage de la liste des établissements
-            </li>
-
+            <li><a href="patients/">Affichage de la liste des patients</a></li>
+            <li><a href="">Affichage de la liste des spécialités</a></li>
+            <li><a href="">Affichage de la liste des établissements</a></li>
+            <li><a href="practitioners/">Affichage de la liste des praticiens</a></li>
         </ul>
     </li>
 
     <li><b>Alimentations simples de la BDD (tables sans clés étrangères)</b>
         <ul>
-            <li><a href="">Création d'un praticien</a>
-            </li>
-            <li>
-                Création d'un établissement
-            </li>
+            <li><a href="practitioners/new">Création d'un praticien</a></li>
+            <li><a href="">Création d'un établissement</a></li>
         </ul>
     </li>
-        <li><b>Consultations simples de la BDD (tables sans clés étrangères)</b>
-            <ul>
-                <li>
-                    <a href="patients/">Affichage de la liste des patients</a>
-                </li>
-                <li>
-                    <a href="specialites/">Affichage de la liste des spécialités</a>
-                </li>
-                <li>
-                   <a href="etablishments/"> Affichage de la liste des établissements</a>
-                </li>
 
-            </ul>
-        </li>
-
-        <li><b>Alimentations simples de la BDD (tables sans clés étrangères)</b>
-            <ul>
-                <li><a href="">Création d'un praticien</a>
-                </li>
-                <li>
-                    Création d'un établissement
-                </li>
-            </ul>
-        </li>
-
-        <li><b>Alimentations plus complexes de la BDD</b>
-            <ul>
-                <li>
-                    <a href="">Association praticien-spécialité</a>
-                </li>
-                <li>
-                    <a href="">Création d'un patient</a>
-                </li>
-                <li>
-                    Définir le lieu de pratique d'un praticien donné
-                </li>
-                <li><a href="">
-                        Création d'un rendez-vous entre un patient et un praticien</a>
-                </li>
-            </ul>
-        </li>
     <li><b>Alimentations plus complexes de la BDD</b>
         <ul>
-            <li>
-                <a href="">Association praticien-spécialité</a>
-            </li>
-            <li>
-                <a href="">Création d'un patient</a>
-            </li>
-            <li>
-                Définir le lieu de pratique d'un praticien donné
-            </li>
-            <li><a href="">
-                    Création d'un rendez-vous entre un patient et un praticien</a>
-            </li>
+            <li><a href="">Association praticien-spécialité</a></li>
+            <li><a href="">Création d'un patient</a></li>
+            <li><a href="">Définir le lieu de pratique d'un praticien donné</a></li>
+            <li><a href="">Création d'un rendez-vous entre un patient et un praticien</a></li>
         </ul>
     </li>
 
-        <li><b>Consultations plus complexes de la BDD</b>
-            <ul>
-                <li>
-                    <a href="">Affichage de la liste des praticiens selon la sélection de leur spécialité</a>
-                </li>
-                <li>
-                    Consultation des rdv d'un praticien
-                </li>
-                <li>
-                    Consultation des rdv d'un patient
-                </li>
-            </ul>
-        </li>
-        <li><b>Modifications de la base de donnée</b>
-            <ul>
-                <li>
-                    <a href="">Modifier les données temporelles d'un rendez-vous</a>
-                </li>
-                <li>
-                    Modifier le praticien du rendez-vous
-                </li>
-                <li>
-                    Annuler un rendez-vous
-                </li>
-            </ul>
-        </li>
     <li><b>Consultations plus complexes de la BDD</b>
         <ul>
-            <li>
-                <a href="">Affichage de la liste des praticiens selon la sélection de leur spécialité</a>
-            </li>
-            <li>
-                Consultation des rdv d'un praticien
-            </li>
-            <li>
-                Consultation des rdv d'un patient
-            </li>
+            <li><a href="">Affichage de la liste des praticiens selon la sélection de leur spécialité</a></li>
+            <li><a href="">Consultation des rdv d'un praticien</a></li>
+            <li><a href="">Consultation des rdv d'un patient</a></li>
         </ul>
     </li>
     <li><b>Modifications de la base de donnée</b>
         <ul>
-            <li>
-                <a href="">Modifier les données temporelles d'un rendez-vous</a>
-            </li>
-            <li>
-                Modifier le praticien du rendez-vous
-            </li>
-            <li>
-                Annuler un rendez-vous
-            </li>
+            <li><a href="">Modifier les données temporelles d'un rendez-vous</a></li>
+            <li><a href="">Modifier le praticien du rendez-vous</a></li>
+            <li><a href="">Annuler un rendez-vous</a></li>
         </ul>
     </li>
 
-        <p>CodeIgniter is a community-developed open source project, with several
-             venues for the community members to gather and exchange ideas. View all
-             the threads on <a href="https://forum.codeigniter.com/"
-             target="_blank">CodeIgniter's forum</a>, or <a href="https://join.slack.com/t/codeigniterchat/shared_invite/zt-rl30zw00-obL1Hr1q1ATvkzVkFp8S0Q"
-             target="_blank">chat on Slack</a> !</p>
 
 </ul>
-</body>
-</html>
