@@ -5,9 +5,9 @@
 
     <li><b>Consultations simples de la BDD (tables sans clés étrangères)</b>
         <ul>
-            <li><a href="patients/">Affichage de la liste des patients</a></li>
-            <li><a href="">Affichage de la liste des spécialités</a></li>
-            <li><a href="">Affichage de la liste des établissements</a></li>
+            <li><a href="patients/" class="underline text-blue-600">Affichage de la liste des patients</a></li>
+            <li><a href="specialites/">Affichage de la liste des spécialités</a></li>
+            <li><a href="etablishments/">Affichage de la liste des établissements</a></li>
             <li><a href="practitioners/">Affichage de la liste des praticiens</a></li>
         </ul>
     </li>

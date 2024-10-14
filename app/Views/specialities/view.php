@@ -1,5 +1,3 @@
-<h2><?= esc($title) ?></h2>
-
 <table border="1" cellpadding="10" cellspacing="0">
     <thead>
         <tr>
