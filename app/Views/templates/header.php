@@ -6,12 +6,13 @@
     <script>
         function Autotab(box, longueur, texte)
         {
-            if (texte.length > longueur-1) 
+            if (texte.length > longueur-1)
             {
                 document.getElementById('tel'+box).focus();
             }
         }
     </script>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
 

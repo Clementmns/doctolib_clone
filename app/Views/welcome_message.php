@@ -23,13 +23,16 @@
             <li>
                 Affichage de la liste des établissements
             </li>
+            <li>
+                <a href="practitioners/">Affichage de la liste des praticiens</a>
+            </li>
 
         </ul>
     </li>
 
     <li><b>Alimentations simples de la BDD (tables sans clés étrangères)</b>
         <ul>
-            <li><a href="">Création d'un praticien</a>
+            <li><a href="practitioners/new">Création d'un praticien</a>
             </li>
             <li>
                 Création d'un établissement
