@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Models\EtablishmentsModel;
 
 class Etablishments extends BaseController {
+
     public function index(): void {
         $model = model(EtablishmentsModel::class);
 
@@ -32,5 +33,47 @@ class Etablishments extends BaseController {
         echo view('templates/footer', $data);
     }
 
+    // Méthode pour afficher la vue d'ajout
+    public function addView() {
+        helper('form');
 
+        $data = [
+            'title' => 'Ajouter un établissement',
+        ];
+
+      if (!$validation->withRequest($this->request)->run()) {
+    echo view('templates/header', ['title' => 'Ajouter un établissement']);
+    echo view('etablishments/add_etablishments', ['validation' => $validation]);
+    echo view('templates/footer');
+    return '';
+}
+
+
+    }
+
+    // Méthode pour créer un nouvel établissement
+    public function create() {
+        $validation = \Config\Services::validation();
+
+        // Définir les règles de validation
+        $validation->setRules([
+            'name' => 'required|max_length[50]',
+            'location' => 'required|max_length[50]',
+            'open_hour' => 'required|max_length[50]', // Ajout de la validation pour open_hour
+        ]);
+
+        if (!$validation->withRequest($this->request)->run()) {
+            // En cas d'erreur de validation, retourner à la vue d'ajout avec les erreurs
+            return view('etablishments/add_etablishments', ['validation' => $validation]);
+        }
+
+        $model = new EtablishmentsModel();
+        $model->save([
+            'name' => $this->request->getPost('name'),
+            'location' => $this->request->getPost('location'),
+            'open_hour' => $this->request->getPost('open_hour'), // Sauvegarde de open_hour
+        ]);
+
+        return redirect()->to(base_url('etablishments'))->with('success', 'Établissement ajouté avec succès');
+    }
 }

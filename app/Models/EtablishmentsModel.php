@@ -4,19 +4,18 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class EtablishmentsModel extends Model
-{
-    protected $table = 'etablishment'; // Le nom de ta table d'établissements
+class EtablishmentsModel extends Model {
+    protected $table = 'etablishment'; // Le nom de la table d'établissements
+    protected $primaryKey = 'id_etablishment'; // Clé primaire
+    protected $allowedFields = ['location', 'name', 'open_hour']; // Champs autorisés pour l'insertion
 
-    public function getEtablishments($page = 1, $perPage = 10)
-    {
+    // Méthode pour récupérer les établissements paginés
+    public function getEtablishments($page = 1, $perPage = 10) {
         $offset = ($page - 1) * $perPage;
 
-        $results = $this->orderBy('name', 'ASC') // Tri par nom d'établissement
-                        ->limit($perPage, $offset)
-                        ->find();
-
-        return $results;
+        return $this->orderBy('name', 'ASC') // Tri par nom d'établissement
+                    ->limit($perPage, $offset)
+                    ->find();
     }
 
     public function addEstablishmentToPractitioner($practitioner_id, $establishment_id): bool
