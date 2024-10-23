@@ -7,7 +7,7 @@ use CodeIgniter\Model;
 class SpecialitiesModel extends Model
 {
     protected $table = 'speciality';
-    protected $allowedFields = ['description']; // Spécifie les champs que tu veux manipuler
+    protected $allowedFields = ['description'];
 
     public function getSpecialites($perPage = 10)
     {

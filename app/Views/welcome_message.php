@@ -21,7 +21,7 @@
     <li>
         <b>Alimentations plus complexes de la BDD</b>
         <ul>
-            <li><a href="" class="hover:underline text-blue-600 ">Association praticien-spécialité</a></li>
+            <li><a href="practitioners/speciality" class="hover:underline text-blue-600 ">Association praticien-spécialité</a></li>
             <li><a href="" class="hover:underline text-blue-600">Création d'un patient</a></li>
             <li><a href="" class="hover:underline text-blue-600">Définir le lieu de pratique d'un praticien donné</a></li>
             <li><a href="" class="hover:underline text-blue-600">Création d'un rendez-vous entre un patient et un praticien</a></li>

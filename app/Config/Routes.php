@@ -22,3 +22,6 @@ $routes->get('specialities', 'Specialities::index');
 $routes->get('practitioners', 'Practitioner::index');
 $routes->get('practitioners/new', 'Practitioner::addView');
 $routes->post('practitioners/create', 'Practitioner::create');
+$routes->get('practitioners/speciality', 'Practitioner::addSpeciality');
+$routes->post('practitioners/speciality', 'Practitioner::associatePraSpe');
+

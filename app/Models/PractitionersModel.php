@@ -17,4 +17,14 @@ class PractitionersModel extends Model
             ->limit($perPage, $offset)
             ->find();
     }
+
+    public function addSpecialityToPractitioner($practitioner_id, $speciality_id): bool
+    {
+        $data = [
+            'id_practitioner' => $practitioner_id,
+            'id_speciality' => $speciality_id,
+        ];
+
+        return $this->db->table('pra_spe')->insert($data);
+    }
 }

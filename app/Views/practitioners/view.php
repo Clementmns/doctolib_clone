@@ -1,4 +1,5 @@
 <a href="practitioners/new"><button>Ajouter un praticien</button></a>
+<a href="practitioners/speciality"><button>Associer un Praticien</button></a>
 <table border="1" cellpadding="10" cellspacing="0">
     <thead>
     <tr>
