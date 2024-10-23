@@ -1,3 +1,4 @@
+<button><a href="patients/create">Ajouter un Patient </a></button>
 <table border="1" cellpadding="10" cellspacing="0">
     <thead>
         <tr>
