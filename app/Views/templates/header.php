@@ -23,8 +23,8 @@
 
         <div class="w-[40vw] flex justify-evenly items-center">
             <a href="<?= base_url(''); ?>" class="hover:underline text-white">Accueil</a>
-            <a href="patients/" class="hover:underline text-white">Patients</a>
-            <a href="etablishments/" class="hover:underline text-white">Établissements</a>
-            <a href="practitioners/" class="hover:underline text-white">Praticien</a>
+            <a href="<?= base_url('patients/'); ?>" class="hover:underline text-white">Patients</a>
+            <a href="<?= base_url('etablishments/'); ?>" class="hover:underline text-white">Établissements</a>
+            <a href="<?= base_url('practitioners/'); ?>" class="hover:underline text-white">Praticien</a>
         </div>
     </header>
