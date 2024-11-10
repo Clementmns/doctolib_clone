@@ -11,6 +11,9 @@ $routes->get('/', 'Home::index');
 
 // PATIENTS
 $routes->get('patients', 'Patients::index');
+$routes->get('patients/create', 'Patients::create');
+$routes->post('patients/create', 'Patients::create');
+
 
 // ÉTABLISSEMENTS
 $routes->get('etablishments', 'Etablishments::index');
