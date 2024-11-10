@@ -7,11 +7,11 @@ use CodeIgniter\Model;
 class SpecialitiesModel extends Model
 {
     protected $table = 'speciality';
+    protected $primaryKey = 'id_speciality';
     protected $allowedFields = ['description'];
 
-    public function getSpecialites($perPage = 10)
+    public function getSpecialities($perPage = 10): ?array
     {
-        // On ordonne par description et on pagine les résultats
         return $this->orderBy('description', 'ASC')
             ->paginate($perPage);
     }

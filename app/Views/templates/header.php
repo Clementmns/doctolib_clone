@@ -3,7 +3,6 @@
 
 <head>
     <title>Mon doctolib</title>
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>/style.css">
     <script>
         function Autotab(box, longueur, texte) {
             if (texte.length > longueur - 1) {
@@ -28,3 +27,26 @@
             <a href="<?= base_url('practitioners/'); ?>" class="hover:underline text-white">Praticien</a>
         </div>
     </header>
+    <div id="toast-container" class="fixed bottom-5 right-5 space-y-4 z-50">
+        <?php if (session()->has('success')) : ?>
+            <div class="toast bg-green-500 text-white p-4 rounded-lg shadow-md flex items-center justify-between space-x-2">
+                <span><?= session('success') ?></span>
+                <button onclick="this.parentElement.remove()" class="text-white font-bold">×</button>
+            </div>
+        <?php endif; ?>
+
+        <?php if (session()->has('error')) : ?>
+            <div class="toast bg-red-500 text-white p-4 rounded-lg shadow-md flex items-center justify-between space-x-2">
+                <span><?= session('error') ?></span>
+                <button onclick="this.parentElement.remove()" class="text-white font-bold">×</button>
+            </div>
+        <?php endif; ?>
+
+        <?php if (session()->has('warning')) : ?>
+            <div class="toast bg-yellow-500 text-white p-4 rounded-lg shadow-md flex items-center justify-between space-x-2">
+                <span><?= session('warning') ?></span>
+                <button onclick="this.parentElement.remove()" class="text-white font-bold">×</button>
+            </div>
+        <?php endif; ?>
+    </div>
+

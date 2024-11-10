@@ -23,8 +23,13 @@ $routes->get('specialities', 'Specialities::index');
 
 // PRATICIENS
 $routes->get('practitioners', 'Practitioner::index');
-$routes->get('practitioners/new', 'Practitioner::addView');
+// add
+$routes->get('practitioners/new', 'Practitioner::add');
 $routes->post('practitioners/create', 'Practitioner::create');
-$routes->get('practitioners/speciality', 'Practitioner::addSpeciality');
-$routes->post('practitioners/speciality', 'Practitioner::associatePraSpe');
+// update
+$routes->get('practitioners/edit/(:segment)', 'Practitioner::edit/$1');
+$routes->post('practitioners/update/(:segment)', 'Practitioner::update/$1');
+// delete
+$routes->post('practitioners/delete/(:segment)', 'Practitioner::delete/$1');
+
 
