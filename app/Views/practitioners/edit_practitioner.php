@@ -20,26 +20,59 @@
             <input type="text" id="first_name" name="first_name" value="<?= esc($practitioner['first_name']) ?>" required class="border border-gray-300 rounded p-3 w-full focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Entrez le prénom">
         </div>
 
-        <div id="specialities-container" class="space-y-2">
-            <ul id="specialities-list" class="list-disc pl-5 mb-4">
-                <?php if (!empty($specialities)): ?>
-                    <?php foreach ($specialities as $speciality): ?>
-                        <li class="flex justify-between items-center mb-2">
-                            <input type="hidden" name="speciality_ids[]" value="<?= esc($speciality['id_speciality']) ?>">
-                            <span><?= esc($speciality['description']) ?></span>
-                            <button type="button" class="text-red-500 hover:text-red-700" onclick="removeSpeciality(this, <?= esc($speciality['id_speciality']) ?>)">Supprimer</button>
-                        </li>
-                    <?php endforeach; ?>
-                <?php else: ?>
-                    <li id="no-specialities">Aucune spécialité associée.</li>
-                <?php endif; ?>
-            </ul>
+        <div>
+            <label for="etablishment" class="block text-gray-700">Établissement :</label>
+            <select name="etablishment" id="etablishment" required
+                    class="border border-gray-300 rounded p-3 w-full focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <option value="">Sélectionner un établissement</option>
+                <?php foreach ($availableEstablishments as $etablishment): ?>
+                    <option value="<?= esc($etablishment['id_etablishment']); ?>"
+                        <?= ($etablishment['id_etablishment'] == $selectedEstablishment[0]['id_etablishment']) ? 'selected' : ''; ?>>
+                        <?= esc($etablishment['name']); ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+
+        <div id="specialities-container" class="space-y-2 mt-4">
+            <label for="specialities" class="block text-gray-700">Spécialités :</label>
+
+            <!-- Sélecteur personnalisé -->
+            <div id="specialities-select" class="border border-gray-300 rounded p-3 w-full cursor-pointer relative bg-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <div class="relative">
+                    <div id="selected-specialities-container" class="bg-white border border-gray-300 rounded p-3 cursor-pointer flex flex-wrap items-center" onclick="toggleDropdown()">
+                        <?php if (!empty($selectedSpecialities)): ?>
+                            <?php foreach ($selectedSpecialities as $selected): ?>
+                                <span class="selected-tag bg-blue-600 text-white px-2 py-1 rounded-full mr-2 mb-2">
+                        <?= esc($selected['description']) ?>
+                    </span>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <span class="text-gray-400">Sélectionner des spécialités</span>
+                        <?php endif; ?>
+                    </div>
+
+                    <div id="specialities-options" class="absolute left-0 right-0 top-full mt-2 bg-white border border-gray-300 rounded shadow-lg hidden z-10 max-h-48 overflow-y-auto">
+                        <?php foreach ($specialities as $speciality): ?>
+                            <div class="speciality-option flex items-center px-4 py-2 cursor-pointer
+                     <?= in_array($speciality['id_speciality'], array_column($selectedSpecialities, 'id_speciality')) ? 'bg-blue-600 text-white' : '' ?>"
+                                 data-id="<?= esc($speciality['id_speciality']) ?>"
+                                 data-description="<?= esc($speciality['description']) ?>"
+                                 onclick="toggleSpeciality(this)">
+                                <span class="speciality-name"><?= esc($speciality['description']) ?></span>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+
+                <div id="selected-specialities" class="hidden">
+                </div>
+            </div>
+
         </div>
 
 
-        <button type="button" onclick="addSpecialityDropdown()" class="text-blue-500 hover:underline">Ajouter une spécialité</button>
-
-        <div>
+            <div>
             <h3 class="text-lg font-semibold text-gray-700">Indisponibilités</h3>
             <div id="availability-container" class="mt-2 space-y-2">
                 <?php if (!empty($practitioner['availability'])): ?>
@@ -86,111 +119,89 @@
 </div>
 
 <script>
-	const specialities = <?= json_encode($availableSpecialities); ?>;
-	const associatedSpecialities = <?= json_encode($specialities); ?>;
+	const initialSelectedSpecialities = <?php echo json_encode($selectedSpecialities); ?>;
 
-	const availableSpecialities = specialities.filter(speciality =>
-		!associatedSpecialities.some(assocSpeciality => assocSpeciality.id_speciality === speciality.id_speciality)
-	);
+	const selectedSpecialities = new Set();
 
-	function addSpecialityDropdown() {
-		const container = document.getElementById('specialities-container');
-
-		const specialityField = document.createElement('div');
-		specialityField.className = "flex items-center space-x-4";
-
-		const select = document.createElement('select');
-		select.name = "speciality_ids[]";
-		select.className = "border border-gray-300 rounded p-2 flex-1 focus:outline-none focus:ring-2 focus:ring-blue-500";
-
-		const emptyOption = document.createElement('option');
-		emptyOption.value = "";
-		emptyOption.text = "Sélectionner une spécialité";
-		select.appendChild(emptyOption);
-
-		specialities.forEach(speciality => {
-			const option = document.createElement('option');
-			option.value = speciality.id_speciality;
-			option.text = speciality.description;
-			select.appendChild(option);
+	window.addEventListener('DOMContentLoaded', () => {
+		initialSelectedSpecialities.forEach(speciality => {
+			selectedSpecialities.add(speciality.id_speciality);
 		});
 
-		specialityField.appendChild(select);
+		updateSelectedSpecialities();
+	});
 
-		container.appendChild(specialityField);
+	document.addEventListener('click', function(event) {
+		const dropdown = document.getElementById("specialities-options");
+		const selectButton = document.getElementById("specialities-select");
+		const isClickInsideDropdown = dropdown.contains(event.target);
+		const isClickInsideButton = selectButton.contains(event.target);
+
+		if (!isClickInsideDropdown && !isClickInsideButton) {
+			dropdown.classList.add("hidden");
+		}
+	});
+
+	function toggleDropdown() {
+		const dropdown = document.getElementById("specialities-options");
+		dropdown.classList.toggle("hidden");
 	}
 
-	function removeSpeciality(button, specialityValue) {
-		const listItem = button.parentElement;
-		listItem.remove();
+	function toggleSpeciality(element) {
+		const id = element.getAttribute("data-id");
+		const description = element.getAttribute("data-description");
 
-		const hiddenInput = document.createElement('input');
-		hiddenInput.type = 'hidden';
-		hiddenInput.name = 'removed_speciality_ids[]';
-		hiddenInput.value = specialityValue;
+		if (selectedSpecialities.has(id)) {
+			selectedSpecialities.delete(id);
+			element.classList.remove("bg-blue-600", "text-white");
+		} else {
+			selectedSpecialities.add(id);
+			element.classList.add("bg-blue-600", "text-white");
+		}
 
-		document.getElementById('specialities-container').appendChild(hiddenInput);
+		updateSelectedSpecialities();
 	}
 
-	function addSpeciality() {
-		const specialitySelect = document.getElementById('available_specialities');
-		const specialityValue = specialitySelect.value;
-		const specialityText = specialitySelect.options[specialitySelect.selectedIndex].text;
+	function updateSelectedSpecialities() {
+		const container = document.getElementById("selected-specialities");
+		const selectedSpecialitiesContainer = document.getElementById("selected-specialities-container");
 
-		if (specialityValue) {
-			const noSpecialitiesText = document.getElementById('no-specialities');
-			if (noSpecialitiesText) {
-				noSpecialitiesText.remove();
-			}
+		container.innerHTML = '';
 
-			const listItem = document.createElement('li');
-			listItem.className = 'flex justify-between items-center mb-2';
-			listItem.innerHTML = `
-            <span>${specialityText}</span>
-            <button type="button" class="text-red-500 hover:text-red-700" onclick="removeSpeciality(this, ${specialityValue})">Supprimer</button>
-        `;
+		selectedSpecialitiesContainer.innerHTML = '';
 
-			document.getElementById('specialities-list').appendChild(listItem);
+		if (selectedSpecialities.size === 0) {
+			const placeholder = document.createElement("span");
+			placeholder.classList.add("text-gray-400");
+			placeholder.textContent = "Sélectionner des spécialités";
+			selectedSpecialitiesContainer.appendChild(placeholder);
+		} else {
+			selectedSpecialities.forEach(id => {
+				const specialityOption = document.querySelector(`[data-id="${id}"]`);
+				const description = specialityOption ? specialityOption.getAttribute("data-description") : '';
 
-			specialitySelect.querySelector(`option[value="${specialityValue}"]`).remove();
+				const tag = document.createElement("span");
+				tag.classList.add("selected-tag", "bg-blue-600", "text-white", "px-2", "py-1", "rounded-full", "mr-2", "mb-2");
+				tag.textContent = description;
+				selectedSpecialitiesContainer.appendChild(tag);
 
-			specialitySelect.value = '';
+				const input = document.createElement("input");
+				input.type = "hidden";
+				input.name = "speciality_ids[]";
+				input.value = id;
+				container.appendChild(input);
+			});
 		}
 	}
 
-	function removeSpecialityField(field) {
-		field.remove();
-		updateAvailableSpecialities();
-	}
 
-	function updateAvailableSpecialities() {
-		const selectedSpecialities = Array.from(document.querySelectorAll('select[name="speciality_id[]"]'))
-			.map(select => select.value)
-			.filter(value => value !== "");
-
-		const allSelects = document.querySelectorAll('select[name="speciality_id[]"]');
-
-		allSelects.forEach(select => {
-			const currentValue = select.value;
-			select.innerHTML = "";
-
-			const emptyOption = document.createElement('option');
-			emptyOption.value = "";
-			emptyOption.text = "Sélectionner une spécialité";
-			select.appendChild(emptyOption);
-
-			specialities.forEach(speciality => {
-				if (!selectedSpecialities.includes(String(speciality.id_speciality)) || String(speciality.id_speciality) === currentValue) {
-					const option = document.createElement('option');
-					option.value = speciality.id_speciality;
-					option.text = speciality.description;
-					select.appendChild(option);
-				}
-			});
-
-			select.value = currentValue;
+	window.addEventListener('DOMContentLoaded', () => {
+		const initialSelectedSpecialities = <?php echo json_encode($selectedSpecialities); ?>;
+		initialSelectedSpecialities.forEach(speciality => {
+			selectedSpecialities.add(speciality.id_speciality);
 		});
-	}
+		updateSelectedSpecialities();
+	});
 
 	function addAvailability() {
 		const container = document.getElementById('availability-container');

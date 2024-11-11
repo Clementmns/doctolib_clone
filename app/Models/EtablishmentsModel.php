@@ -18,4 +18,31 @@ class EtablishmentsModel extends Model
 
         return $results;
     }
+
+    public function addEstablishmentToPractitioner($practitioner_id, $establishment_id): bool
+    {
+        $data = [
+            'id_practitioner' => $practitioner_id,
+            'id_etablishment' => $establishment_id,
+        ];
+
+        return $this->db->table('pra_etab')->insert($data);
+    }
+
+    public function deleteEstablishmentToPractitioner($practitioner_id): bool
+    {
+        return $this->db->table('pra_etab')
+            ->where('id_practitioner', $practitioner_id)
+            ->delete();
+    }
+
+    public function getEstablishmentsByPractitionerId($practitioner_id): array
+    {
+        return $this->db->table('pra_etab')
+            ->join('etablishment', 'pra_etab.id_etablishment = etablishment.id_etablishment')
+            ->where('pra_etab.id_practitioner', $practitioner_id)
+            ->select('etablishment.*')
+            ->get()
+            ->getResultArray();
+    }
 }

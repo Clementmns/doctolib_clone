@@ -28,6 +28,7 @@
             <th class="border border-gray-300 px-4 py-2">Prénom</th>
             <th class="border border-gray-300 px-4 py-2">Indisponibilité</th>
             <th class="border border-gray-300 px-4 py-2">Spécialités</th>
+            <th class="border border-gray-300 px-4 py-2">Établissement</th>
         </tr>
         </thead>
         <tbody>
@@ -42,11 +43,23 @@
                             : $practitioner['availability'];
 
                         if (is_array($availability)) {
+                            $frenchDays = [
+                                'Monday' => 'Lundi',
+                                'Tuesday' => 'Mardi',
+                                'Wednesday' => 'Mercredi',
+                                'Thursday' => 'Jeudi',
+                                'Friday' => 'Vendredi',
+                                'Saturday' => 'Samedi',
+                                'Sunday' => 'Dimanche'
+                            ];
+
                             foreach ($availability as $timeSlot) {
-                                $day = $timeSlot['day'];
-                                $from = date("g:i A", strtotime($timeSlot['from']));
-                                $to = date("g:i A", strtotime($timeSlot['to']));
-                                echo "$day: de $from à $to\n";
+                                $englishDays = date("l", strtotime($timeSlot['day']));
+                                $day = $frenchDays[$englishDays] ?? $englishDays;
+
+                                $from = date("G:i", strtotime($timeSlot['from']));
+                                $to = date("G:i", strtotime($timeSlot['to']));
+                                echo "$day : de $from h à $to h\n";
                             }
                         } else {
                             echo "Aucune indisponibilité";
@@ -55,6 +68,9 @@
                     </td>
                     <td class="border border-gray-300 px-4 py-2">
                         <?= !empty($practitioner['specialities']) ? implode(', ', esc($practitioner['specialities'])) : 'Aucune spécialité assignée' ?>
+                    </td>
+                    <td class="border border-gray-300 px-4 py-2">
+                        <?= !empty($practitioner['establishments']) ? implode(', ', esc($practitioner['establishments'])) : 'Aucun établissement assigné' ?>
                     </td>
                 </tr>
             <?php endforeach; ?>

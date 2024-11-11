@@ -13,8 +13,18 @@
                class="border border-gray-300 rounded p-3 w-full focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Entrez le prénom">
     </div>
 
-    <div id="specialities-container" class="space-y-2"></div>
+    <div>
+        <label for="etablishment" class="block text-gray-700">Établissement :</label>
+        <select name="etablishment" id="etablishment" required
+                class="border border-gray-300 rounded p-3 w-full focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <option value="">Sélectionner un établissement</option>
+            <?php foreach ($establishments as $etablishment): ?>
+                <option value="<?= esc($etablishment['id_etablishment']); ?>"><?= esc($etablishment['name']); ?></option>
+            <?php endforeach; ?>
+        </select>
+    </div>
 
+    <div id="specialities-container" class="space-y-2"></div>
     <button type="button" onclick="addSpecialityDropdown()" class="text-blue-500 hover:underline">Ajouter une spécialité</button>
 
     <div>
