@@ -1,6 +1,5 @@
 <ul class="relative z-10">
-    <li class="w-screen bg-blue-500 rounded-b-3xl p-4">
-        <p class="text-white">Consultations simples de la BDD (tables sans clés étrangères)</p>
+    <li class="w-screen bg-[#117ACA] rounded-b-3xl p-4">
         <ul class="flex justify-around m-3">
             <li class="relative w-[200px] h-[200px] rounded-3xl flex justify-center items-center bg-[url('<?= base_url('assets/patient.jpg'); ?>')] bg-cover bg-center">
                 <div class="absolute inset-0 bg-black/30 rounded-3xl"></div>
@@ -20,6 +19,18 @@
             <li class="relative w-[200px] h-[200px] rounded-3xl flex justify-center items-center bg-[url('<?= base_url('assets/praticien.jpg'); ?>')] bg-cover bg-center">
                 <div class="absolute inset-0 bg-black/30 rounded-3xl"></div>
                 <a href="practitioners/" class="relative hover:underline text-white z-10 text-3xl">Praticiens</a>
+            </li>
+        </ul>
+        <ul class="flex flex-col items-center">
+            <li class="w-[50vw]"><h2 class="text-2xl font-bold text-white">Vivez <span class="text-[#CCF2FF]">en meilleur santé</span></h2></li>
+            <li class="w-[50vw]">
+                <div class="w-full flex gap-4 border border-gray-300 rounded-full p-1 bg-white">
+                    <div class="w-full flex">
+                        <input type="text" class="p-4 rounded-l-full w-full border-r border-gray-300" placeholder="Nom, spécialité, établissement,...">
+                        <input type="text" class="p-4 w-full" placeholder="Où ?">
+                    </div>
+                    <button class="text-white rounded-r-full p-4 bg-[#00264C]">Rechercher</button>
+                </div>
             </li>
         </ul>
     </li>

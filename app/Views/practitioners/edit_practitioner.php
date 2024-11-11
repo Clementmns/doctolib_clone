@@ -78,7 +78,7 @@
             <button type="button" onclick="addAvailability()" class="mt-2 text-blue-500 hover:underline">Ajouter un créneau</button>
         </div>
 
-        <button type="submit" class="bg-blue-500 text-white rounded p-3 hover:bg-blue-600 transition duration-200">Modifier</button>
+        <button type="submit" class="bg-[#117ACA] text-white rounded p-3 hover:bg-[#00264C] transition duration-200">Modifier</button>
         <a href="<?= base_url('practitioners'); ?>">
             <button type="button" class="bg-gray-500 text-white rounded p-3 hover:bg-gray-600 transition duration-200">Annuler</button>
         </a>

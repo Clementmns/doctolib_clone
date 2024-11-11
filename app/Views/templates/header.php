@@ -14,10 +14,10 @@
 </head>
 
 <body>
-    <header class="w-screen bg-blue-500 flex justify-between">
-        <a href="<?= base_url(''); ?>" class="flex items-center">
-            <img src="<?= base_url('assets/logo_doctolib.png'); ?>" alt="Logo Doctolib" class="h-20">
-            <p class="text-white text-4xl translate-x-[-10px]">re</p>
+    <header class="bg-[#117ACA] flex justify-between p-6">
+        <a href="<?= base_url(''); ?>" class="flex item-start">
+            <img src="<?= base_url('assets/logo_doctolib.png'); ?>" alt="Logo Doctolib" class="h-8">
+            <p class="text-white text-4xl">re</p>
         </a>
 
         <div class="w-[40vw] flex justify-evenly items-center">

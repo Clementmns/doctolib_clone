@@ -1,7 +1,7 @@
 <div class="p-6 space-y-6 bg-gray-100 rounded-lg shadow-md">
     <h2 class="text-2xl font-bold text-gray-700">Liste des praticiens</h2>
     <div class="flex justify-between items-center mb-4">
-        <a href="practitioners/new" class="bg-blue-500 text-white rounded p-2 hover:bg-blue-600 transition duration-200">
+        <a href="practitioners/new" class="bg-[#117ACA] text-white rounded p-2 hover:bg-[#00264C] transition duration-200">
             Ajouter un praticien
         </a>
 
@@ -15,7 +15,7 @@
                     </option>
                 <?php endforeach; ?>
             </select>
-            <button type="submit" class="bg-blue-500 text-white rounded p-2 hover:bg-blue-600 transition duration-200">
+            <button type="submit" class="bg-[#117ACA] text-white rounded p-2 hover:bg-[#00264C] transition duration-200">
                 Filtrer
             </button>
         </form>
