@@ -6,7 +6,7 @@
     <title><?= esc($title) ?></title>
 </head>
 <body>
-    <h1><?= esc($title) ?></h1>
+<button><a href="etablishments/new">Ajouter un établissement</a></button>
 
     <table border="1" cellpadding="10" cellspacing="0">
         <thead>

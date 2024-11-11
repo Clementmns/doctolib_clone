@@ -41,12 +41,11 @@ class Etablishments extends BaseController {
             'title' => 'Ajouter un établissement',
         ];
 
-      if (!$validation->withRequest($this->request)->run()) {
     echo view('templates/header', ['title' => 'Ajouter un établissement']);
-    echo view('etablishments/add_etablishments', ['validation' => $validation]);
+    echo view('etablishments/add_etablishments');
     echo view('templates/footer');
-    return '';
-}
+    
+
 
 
     }
