@@ -37,7 +37,6 @@
         <div id="specialities-container" class="space-y-2 mt-4">
             <label for="specialities" class="block text-gray-700">Spécialités :</label>
 
-            <!-- Sélecteur personnalisé -->
             <div id="specialities-select" class="border border-gray-300 rounded p-3 w-full cursor-pointer relative bg-white focus:outline-none focus:ring-2 focus:ring-blue-500">
                 <div class="relative">
                     <div id="selected-specialities-container" class="bg-white border border-gray-300 rounded p-3 cursor-pointer flex flex-wrap items-center" onclick="toggleDropdown()">
@@ -71,8 +70,7 @@
 
         </div>
 
-
-            <div>
+        <div>
             <h3 class="text-lg font-semibold text-gray-700">Indisponibilités</h3>
             <div id="availability-container" class="mt-2 space-y-2">
                 <?php if (!empty($practitioner['availability'])): ?>
@@ -193,15 +191,6 @@
 			});
 		}
 	}
-
-
-	window.addEventListener('DOMContentLoaded', () => {
-		const initialSelectedSpecialities = <?php echo json_encode($selectedSpecialities); ?>;
-		initialSelectedSpecialities.forEach(speciality => {
-			selectedSpecialities.add(speciality.id_speciality);
-		});
-		updateSelectedSpecialities();
-	});
 
 	function addAvailability() {
 		const container = document.getElementById('availability-container');

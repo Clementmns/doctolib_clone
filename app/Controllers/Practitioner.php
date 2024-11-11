@@ -64,7 +64,6 @@ class Practitioner extends BaseController {
             'first_name' => 'required|max_length[50]',
             'availability' => 'max_length[100]',
             'etablishment' => 'required',
-            'speciality_id' => 'required'
         ]);
 
         helper('form');
@@ -97,7 +96,7 @@ class Practitioner extends BaseController {
         $availability_json = json_encode($availability);
 
         $practitionerModel = new PractitionersModel();
-        $speciality_ids = $this->request->getPost('speciality_id') ?? [];
+        $speciality_ids = $this->request->getPost('speciality_ids') ?? [];
 
         $establishment_id = $this->request->getPost('etablishment');
 
