@@ -14,9 +14,12 @@ class Patients extends BaseController
         $page = $this->request->getVar('page') ?? 1;
         $perPage = 10;
 
-        $patients = $model->getPatients($page, $perPage);
+        // Récupérer le terme de recherche
+        $search = $this->request->getVar('search');
 
-        $totalPatients = $model->countAllResults();
+        // Filtrer les patients en fonction de la recherche
+        $patients = $model->getPatients($page, $perPage, $search);
+        $totalPatients = $model->countPatients($search);
 
         $pager = \Config\Services::pager();
 
@@ -24,6 +27,7 @@ class Patients extends BaseController
             'patients' => $patients,
             'title' => "Visualisation de tous les patients de la BDD",
             'pager' => $pager->makeLinks($page, $perPage, $totalPatients),
+            'search' => $search,
         ];
 
         echo view('templates/header', $data);
