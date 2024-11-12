@@ -1,4 +1,4 @@
-<button><a href="patients/create">Ajouter un Patient </a></button>
+<button><a href="patients/create">Ajouter un Patient</a></button>
 <table border="1" cellpadding="10" cellspacing="0">
     <thead>
         <tr>
@@ -12,8 +12,8 @@
         <?php if (!empty($patients) && is_array($patients)): ?>
             <?php foreach ($patients as $patient): ?>
                 <tr>
-                    <td><?= esc($patient['last_name']) ?></td>
-                    <td><?= esc($patient['first_name']) ?></td>
+                    <td><a href="patients/appointment?id_patient=<?= esc($patient['id_patient']) ?>"><?= esc($patient['last_name']) ?></a></td>
+                    <td><a href="patients/appointment?id_patient=<?= esc($patient['id_patient']) ?>"><?= esc($patient['first_name']) ?></a></td>
                     <td><?= esc($patient['email']) ?></td>
                     <td><?= esc($patient['birth_date']) ?></td>
                 </tr>

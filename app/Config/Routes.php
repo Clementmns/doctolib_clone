@@ -14,7 +14,6 @@ $routes->get('patients', 'Patients::index');
 $routes->get('patients/create', 'Patients::create');
 $routes->post('patients/create', 'Patients::create');
 
-
 // ETABLISSEMENTS
 $routes->get('etablishments', 'Etablishments::index'); // Lister les établissements
 $routes->get('etablishments/new', 'Etablishments::addView'); // Afficher la vue pour ajouter un établissement
@@ -37,3 +36,5 @@ $routes->post('practitioners/update/(:segment)', 'Practitioner::update/$1');
 $routes->post('practitioners/delete/(:segment)', 'Practitioner::delete/$1');
 
 
+//APPPOINTMENT
+$routes->get('patients/appointment', 'Appointment::index');
