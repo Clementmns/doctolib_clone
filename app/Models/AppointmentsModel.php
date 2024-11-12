@@ -6,9 +6,11 @@ use CodeIgniter\Model;
 
 class AppointmentsModel extends Model
 {
+
     protected $table = 'appointment';
+    protected $primaryKey = 'id_appointment'; // Clé primaire
     protected $allowedFields = [
-        'id_practioner',
+        'id_practitioner',
         'id_patient',
         'date',
         'title',

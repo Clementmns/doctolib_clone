@@ -62,4 +62,14 @@ class PractitionersModel extends Model
             ->where('id_practitioner', $practitioner_id)
             ->delete();
     }
+
+    public function getPractitionerByAppointmentId($appointment_id): array
+    {
+        return $this->db->table('appointment')
+            ->join('practitioner', 'appointment.id_practitioner = practitioner.id_practitioner')
+            ->where('appointment.id_appointment', $appointment_id)
+            ->select('practitioner.*')
+            ->get()
+            ->getResultArray();
+    }
 }
