@@ -5,37 +5,34 @@
            Retour
         </a>
     </div>
-    <table border="1" cellpadding="10" cellspacing="0" class="min-w-full border-collapse border bg-white border-gray-300 mt-4">
-        <thead>
-            <tr class="bg-gray-100">
-                <th class="border border-gray-300 px-4 py-2">Titre</th>
-                <th class="border border-gray-300 px-4 py-2">Date</th>
-                <th class="border border-gray-300 px-4 py-2">Établissement</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php if (!empty($appointments) && is_array($appointments)): ?>
-                <?php foreach ($appointments as $appointment): ?>
-                    <tr class="hover:bg-gray-100 transition duration-200">
-                        <td class="border border-gray-300 px-4 py-2"><?= esc($appointment['title']) ?></td>
-                        <td class="border border-gray-300 px-4 py-2"><?= esc($appointment['date']) ?></td>
-                        <td class="border border-gray-300 px-4 py-2"><?= esc($appointment['id_etablishment']) ?></td>
-                    </tr>
-                <?php endforeach; ?>
-            <?php else: ?>
-                <tr>
-                    <td colspan="4">Aucun rendez-vous trouvé pour ce patient.</td>
-                </tr>
-            <?php endif; ?>
-        </tbody>
-    </table>
-
-    <!-- Liens de pagination -->
-    <?php if (!empty($pager)): ?>
-        <div class="pagination">
-            <?= $pager ?>
-        </div>
-    <?php endif; ?>
-
-    <br>
+    <div id="calendar"></div>
 </div>
+
+<script>
+	let appointments = <?php echo json_encode($appointments); ?>;
+	const transformedAppointments = appointments.map((appointment, index) => ({
+		title: appointment.title + " | " + appointment.practitioner,
+		start: appointment.date,
+	}));
+
+	document.addEventListener('DOMContentLoaded', function() {
+		const calendarEl = document.getElementById('calendar');
+		const calendar = new FullCalendar.Calendar(calendarEl, {
+			initialView: 'dayGridMonth',
+			initialDate: appointments[0].date,
+			locale: 'fr',
+			events: transformedAppointments,
+			eventClick: function(info) {
+				alert('Rendez-vous: ' + info.event.title + '\nDate: ' + info.event.start.toISOString().slice(0, 10));
+			},
+			eventColor: '#3788d8',
+			eventTextColor: '#ffffff',
+			nowIndicator: true,
+			editable: true,
+			selectable: true,
+			dayMaxEvents: true,
+			displayEventTime: false
+		});
+		calendar.render();
+	});
+</script>

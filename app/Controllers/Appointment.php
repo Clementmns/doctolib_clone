@@ -2,7 +2,10 @@
 
 namespace App\Controllers;
 
-use App\Models\AppointmentsModel;  // Utilisez AppointmentsModel ici
+use App\Models\AppointmentsModel;
+use App\Models\PractitionersModel;
+
+// Utilisez AppointmentsModel ici
 
 class Appointment extends BaseController
 {
@@ -10,6 +13,7 @@ class Appointment extends BaseController
     {
         // Instancier correctement le modèle AppointmentsModel
         $model = new AppointmentsModel();
+        $practitionerModel = new PractitionersModel();
 
         // Récupérer l'ID du patient depuis l'URL
         $idPatient = $this->request->getVar('id_patient');
@@ -23,6 +27,12 @@ class Appointment extends BaseController
 
         // Récupérer les rendez-vous pour l'ID du patient
         $appointments = $model->getAppointments($idPatient, $page, $perPage);
+
+        foreach ($appointments as &$appointment) {
+            $practitioner = $practitionerModel->getPractitionerByAppointmentId($appointment['id_appointment']);
+            $appointment['practitioner'] = $practitioner[0]["first_name"] . ' ' . $practitioner[0]["last_name"];
+        }
+        unset($appointment);
 
         // Total des rendez-vous pour le patient spécifié
         $totalAppointments = $model->where('id_patient', $idPatient)->countAllResults();
