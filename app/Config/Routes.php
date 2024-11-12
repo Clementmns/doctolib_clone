@@ -27,6 +27,12 @@ $routes->post('etablishments/update/(:num)', 'Etablishments::update/$1');
 
 //SPÉCIALITÉS
 $routes->get('specialities', 'Specialities::index');
+$routes->get('specialities', 'Specialities::index');
+$routes->get('specialities/add', 'Specialities::addView');
+$routes->post('specialities/create', 'Specialities::create');
+$routes->get('specialities/edit/(:num)', 'Specialities::edit/$1');
+$routes->post('specialities/update/(:num)', 'Specialities::update/$1');
+
 
 // PRATICIENS
 $routes->get('practitioners', 'Practitioner::index');
