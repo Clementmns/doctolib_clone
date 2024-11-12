@@ -72,7 +72,6 @@
 
 
 <script>
-	// JavaScript pour montrer/masquer les étapes en fonction de la sélection de l'utilisateur
 	document.getElementById('id_speciality').addEventListener('change', function () {
 		document.getElementById('step2').style.display = 'block';
 	});

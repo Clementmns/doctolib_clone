@@ -85,7 +85,6 @@
 			eventColor: '#3788d8',
 			eventTextColor: '#ffffff',
 			nowIndicator: true,
-			editable: true,
 			selectable: true,
 			dayMaxEvents: true,
 			displayEventTime: false

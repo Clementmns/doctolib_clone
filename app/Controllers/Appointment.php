@@ -17,7 +17,7 @@ class Appointment extends BaseController
 
         $idPatient = $this->request->getVar('id_patient');
         if (!$idPatient) {
-            return redirect()->to('/patients')->with('error', 'ID du patient non spécifié.');
+            return redirect()->back()->with('error', 'ID du patient non spécifié.');
         }
 
         $page = $this->request->getVar('page') ?? 1;
@@ -54,9 +54,12 @@ class Appointment extends BaseController
         $practitionerModel = new PractitionersModel();
         $patientModel = new PatientsModel();
         $etablishmentModel = new EtablishmentsModel();
+        $specialityModel = new SpecialitiesModel();
 
+        $filterType = $this->request->getGet('filterType');
+        $filterValue = $this->request->getGet('filterValue');
 
-        $appointments = $model->findAll();
+        $appointments = $model->getAppointmentsByFilter($filterType, $filterValue);
 
         foreach ($appointments as &$appointment) {
             $appointment['practitioner'] = $practitionerModel->getPractitionerById($appointment['id_practitioner']);
@@ -65,11 +68,14 @@ class Appointment extends BaseController
         }
         unset($appointment);
 
-        $totalAppointments = $model->countAllResults();
-
         $data = [
             'appointments' => $appointments,
             'practitioners' => $practitionerModel->findAll(),
+            'patients' => $patientModel->findAll(),
+            'etablishments' => $etablishmentModel->findAll(),
+            'specialities' => $specialityModel->findAll(),
+            'filterType' => $filterType,
+            'filterValue' => $filterValue,
         ];
 
         echo view('templates/header', $data);
@@ -84,26 +90,22 @@ class Appointment extends BaseController
         $etablishmentModel = new EtablishmentsModel();
         $patientModel = new PatientsModel();
 
-        // Déclare les variables pour les spécialités, établissements et praticiens
-        $specialities = $specialityModel->findAll();  // Charge toutes les spécialités
+        $specialities = $specialityModel->findAll();
         $etablishments = [];
         $practitioners = [];
         $selectedPatientId = null;
-        $patients = $patientModel->orderBy('last_name', 'ASC')->findAll(); // Récupère tous les patients
+        $patients = $patientModel->orderBy('last_name', 'ASC')->findAll();
 
-        // Récupère les sélections actuelles de l'utilisateur
         $selectedSpecialityId = $this->request->getVar('id_speciality');
         $selectedEstablishmentId = $this->request->getVar('id_etablishment');
         $selectedPractitionerId = $this->request->getVar('id_practitioner');
         $selectedPatientId = $this->request->getVar('id_patient');
         $appointment_time = $this->request->getVar('appointment_time');
 
-        // Si une spécialité est sélectionnée, charge les établissements associés
         if ($selectedSpecialityId) {
             $etablishments = $etablishmentModel->getEstablishmentsBySpeciality($selectedSpecialityId);
         }
 
-        // Si un établissement et une spécialité sont sélectionnés, charge les praticiens associés
         if ($selectedEstablishmentId && $selectedSpecialityId) {
             $practitioners = $practitionerModel->getPractitionersByEstablishmentAndSpeciality($selectedEstablishmentId, $selectedSpecialityId);
         }
@@ -128,7 +130,6 @@ class Appointment extends BaseController
             }
         }
 
-        // Passer les données à la vue
 
         $data = [
             'specialities' => $specialities,
@@ -147,7 +148,6 @@ class Appointment extends BaseController
         echo view('appointments/add', $data);
         echo view('templates/footer', $data);
     }
-
 
     public function update(): \CodeIgniter\HTTP\RedirectResponse
     {
@@ -188,13 +188,12 @@ class Appointment extends BaseController
         try {
             $model->delete($appointmentId);
         } catch (\ReflectionException $e) {
-            return redirect()->to('/patients/appointment')->with('error', 'Erreur lors de la suppression du rendez-vous : ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Erreur lors de la suppression du rendez-vous : ' . $e->getMessage());
         }
 
-        return redirect()->to('/patients/appointment')->with('success', 'Rendez-vous supprimé avec succès.');
+        return redirect()->back()->with('success', 'Rendez-vous supprimé avec succès.');
     }
 
-    // Fonction practitionerAppointments : Liste des rendez-vous pour un praticien
     public function practitionerAppointments()
     {
         $model = new AppointmentsModel();
@@ -226,7 +225,6 @@ class Appointment extends BaseController
         echo view('templates/footer', $data);
     }
 
-    // Fonction updatePrac : Mise à jour d'un rendez-vous d'un praticien
     public function updatePrac(): \CodeIgniter\HTTP\RedirectResponse
     {
         $model = new AppointmentsModel();
@@ -265,8 +263,6 @@ class Appointment extends BaseController
         return redirect()->to('/practitioners')->with('success', 'Le rendez-vous a été mis à jour.');
     }
 
-
-    // Fonction deletePrac : Suppression d'un rendez-vous d'un praticien
     public function deletePrac(): \CodeIgniter\HTTP\RedirectResponse
     {
         $model = new AppointmentsModel();

@@ -32,7 +32,7 @@ class Practitioner extends BaseController {
 
         foreach ($practitioners as &$practitioner) {
             $specialities = $model->getSpecialitiesByPractitionerId($practitioner['id_practitioner']);
-            $establishments = $establishmentModel->getEstablishmentsByPractitionerId($practitioner['id_practitioner']);
+            $establishments = $establishmentModel->getEstablishmentByPractitionerId($practitioner['id_practitioner']);
 
             $practitioner['specialities'] = array_column($specialities, 'description');
             $practitioner['establishments'] = array_column($establishments, 'name');
@@ -130,7 +130,7 @@ class Practitioner extends BaseController {
 
         $establishmentModel = new EtablishmentsModel();
         $availableEstablishments = $establishmentModel->findAll();
-        $establishment = $establishmentModel->getEstablishmentsByPractitionerId($id);
+        $establishment = $establishmentModel->getEstablishmentByPractitionerId($id);
 
         if (!$practitioner) {
             throw new \CodeIgniter\Exceptions\PageNotFoundException('Praticien non trouvé');
@@ -228,7 +228,7 @@ class Practitioner extends BaseController {
 
             $data['practitioner'] = $practitionersModel->find($id);
             $data['specialities'] = $practitionersModel->getSpecialitiesByPractitionerId($id);
-            $data['selectedEstablishment'] = $establishmentModel->getEstablishmentsByPractitionerId($id);
+            $data['selectedEstablishment'] = $establishmentModel->getEstablishmentByPractitionerId($id);
             $data['establishments'] = $establishmentModel->findAll();
             $data['selectedSpecialities'] = $practitionersModel->getSpecialitiesByPractitionerId($id);
 

@@ -1,40 +1,27 @@
-<ul class="relative z-10">
-    <li class="w-screen bg-[#117ACA] rounded-b-3xl p-4">
-        <ul class="flex justify-around m-3">
-            <li class="relative w-[200px] h-[200px] rounded-3xl flex justify-center items-center bg-[url('<?= base_url('assets/patient.jpg'); ?>')] bg-cover bg-center">
-                <div class="absolute inset-0 bg-black/30 rounded-3xl"></div>
-                <a href="patients/" class="relative hover:underline text-white z-10 text-3xl">Patients</a>
-            </li>
+<main class="relative z-10 h-[70vh] flex flex-col items-center justify-center space-y-8 bg-gray-50">
+    <section class="w-full flex justify-around p-4">
+        <div class="relative w-[200px] h-[200px] rounded-3xl bg-cover bg-center shadow-lg transform transition-transform duration-200 hover:scale-105" style="background-image: url('<?= base_url('assets/patient.jpg'); ?>');">
+            <div class="absolute inset-0 bg-black/30 rounded-3xl"></div>
+            <a href="patients/" class="relative flex justify-center items-center h-full text-white text-3xl z-10 hover:underline">Patients</a>
+        </div>
 
-            <li class="relative w-[200px] h-[200px] rounded-3xl flex justify-center items-center bg-[url('<?= base_url('assets/speciality.jpg'); ?>')] bg-cover bg-center">
-                <div class="absolute inset-0 bg-black/30 rounded-3xl"></div>
-                <a href="specialities/" class="relative hover:underline text-white z-10 text-3xl">Spécialités</a>
-            </li>
+        <div class="relative w-[200px] h-[200px] rounded-3xl bg-cover bg-center shadow-lg transform transition-transform duration-200 hover:scale-105" style="background-image: url('<?= base_url('assets/speciality.jpg'); ?>');">
+            <div class="absolute inset-0 bg-black/30 rounded-3xl"></div>
+            <a href="specialities/" class="relative flex justify-center items-center h-full text-white text-3xl z-10 hover:underline">Spécialités</a>
+        </div>
 
-            <li class="relative w-[200px] h-[200px] rounded-3xl flex justify-center items-center bg-[url('<?= base_url('assets/hopital.jpg'); ?>')] bg-cover bg-center">
-                <div class="absolute inset-0 bg-black/30 rounded-3xl"></div>
-                <a href="etablishments/" class="relative hover:underline text-white z-10 text-3xl">Établissements</a>
-            </li>
+        <div class="relative w-[200px] h-[200px] rounded-3xl bg-cover bg-center shadow-lg transform transition-transform duration-200 hover:scale-105" style="background-image: url('<?= base_url('assets/hopital.jpg'); ?>');">
+            <div class="absolute inset-0 bg-black/30 rounded-3xl"></div>
+            <a href="etablishments/" class="relative flex justify-center items-center h-full text-white text-3xl z-10 hover:underline">Établissements</a>
+        </div>
 
-            <li class="relative w-[200px] h-[200px] rounded-3xl flex justify-center items-center bg-[url('<?= base_url('assets/praticien.jpg'); ?>')] bg-cover bg-center">
-                <div class="absolute inset-0 bg-black/30 rounded-3xl"></div>
-                <a href="practitioners/" class="relative hover:underline text-white z-10 text-3xl">Praticiens</a>
-            </li>
-        </ul>
-        <ul class="flex flex-col items-center">
-            <a href="appointments/" class="relative hover:underline text-white z-10 text-3xl">Voir tous les rendez-vous</a>
-        </ul>
-    </li>
-    <li>
-        <p>Alimentations plus complexes de la BDD</p>
-        <ul class="flex justify-around">
-            <li class="w-[200px] h-[200px] border rounded-3xl flex justify-center items-center"><a href="" class="hover:underline text-blue-600">Création d'un rendez-vous entre un patient et un praticien</a></li>
-        </ul>
-    </li>
-    <li>
-        <p>Consultations plus complexes de la BDD</p>
-        <ul class="flex justify-around">
-            <li class="w-[200px] h-[200px] border rounded-3xl flex justify-center items-center"><a href="" class="hover:underline text-blue-600">Consultation des rdv d'un praticien</a></li>
-        </ul>
-    </li>
-</ul>
+        <div class="relative w-[200px] h-[200px] rounded-3xl bg-cover bg-center shadow-lg transform transition-transform duration-200 hover:scale-105" style="background-image: url('<?= base_url('assets/praticien.jpg'); ?>');">
+            <div class="absolute inset-0 bg-black/30 rounded-3xl"></div>
+            <a href="practitioners/" class="relative flex justify-center items-center h-full text-white text-3xl z-10 hover:underline">Praticiens</a>
+        </div>
+    </section>
+
+    <section class="text-center">
+        <a href="appointments/" class="text-3xl text-[#117ACA] font-semibold hover:underline transition-colors duration-200">Voir tous les rendez-vous</a>
+    </section>
+</main>

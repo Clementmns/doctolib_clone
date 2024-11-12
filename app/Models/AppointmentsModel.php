@@ -34,18 +34,45 @@ class AppointmentsModel extends Model
             ->find();
     }
 
-    // Nouvelle méthode de mise à jour d'un rendez-vous
-    public function updateAppointment($appointmentId, $data)
-    {
-        return $this->update($appointmentId, $data);
-    }
 
-    public function getAllAppointments($page = 1, $perPage = 10)
-    {
-        $offset = ($page - 1) * $perPage;
 
-        return $this->orderBy('date', 'ASC')
-            ->limit($perPage, $offset)
+    public function getAppointmentBySpecialityId($specialityId): array|object|null
+    {
+        return $this->select('appointment.*')
+            ->join('pra_spe', 'pra_spe.id_practitioner = appointment.id_practitioner')
+            ->where('pra_spe.id_speciality', $specialityId)
             ->find();
     }
+    public function getAppointmentsByFilter($filterType, $filterValue): array
+    {
+        if (!$filterType || !$filterValue) {
+            return $this->findAll();
+        }
+
+        $this->select('appointment.*')
+            ->join('practitioner', 'practitioner.id_practitioner = appointment.id_practitioner')
+            ->join('pra_spe', 'pra_spe.id_practitioner = practitioner.id_practitioner')
+            ->join('speciality', 'speciality.id_speciality = pra_spe.id_speciality')
+            ->join('patient', 'patient.id_patient = appointment.id_patient')
+            ->join('pra_etab', 'pra_etab.id_practitioner = practitioner.id_practitioner')
+            ->join('etablishment', 'etablishment.id_etablishment = appointment.id_etablishment');
+
+        switch ($filterType) {
+            case 'speciality':
+                $this->where('speciality.id_speciality', $filterValue);
+                break;
+            case 'etablishment':
+                $this->where('etablishment.id_etablishment', $filterValue);
+                break;
+            case 'patient':
+                $this->where('patient.id_patient', $filterValue);
+                break;
+            case 'practitioner':
+                $this->where('practitioner.id_practitioner', $filterValue);
+                break;
+        }
+
+        return $this->findAll();
+    }
+
 }

@@ -1,18 +1,59 @@
 <div class="p-6 space-y-6 bg-gray-100 rounded-lg shadow-md">
     <h2 class="text-2xl font-bold text-gray-700">Liste des rendez-vous</h2>
-    <div class="flex justify-between items-center mb-4">
-        <a href="appointment/new" class="bg-[#117ACA] text-white rounded p-2 hover:bg-[#00264C] transition duration-200">
-            Ajouter un rendez-vous
-        </a>
+
+    <div class="flex flex-wrap justify-between items-center mb-4">
+        <form method="GET" action="<?= base_url('appointments'); ?>" class="flex flex-wrap items-center space-x-4">
+
+            <!-- Sélection du type de filtre -->
+            <label for="filterType" class="font-medium">Filtrer par :</label>
+            <select id="filterType" name="filterType" class="p-2 border rounded" onchange="updateFilterValues()">
+                <option value="">Sélectionner le type</option>
+                <option value="speciality" <?= $filterType === 'speciality' ? 'selected' : ''; ?>>Spécialité</option>
+                <option value="etablishment" <?= $filterType === 'etablishment' ? 'selected' : ''; ?>>Établissement</option>
+                <option value="patient" <?= $filterType === 'patient' ? 'selected' : ''; ?>>Patient</option>
+                <option value="practitioner" <?= $filterType === 'practitioner' ? 'selected' : ''; ?>>Praticien</option>
+            </select>
+
+            <!-- Sélection de la valeur du filtre -->
+            <label for="filterValue" class="font-medium">Valeur :</label>
+            <select id="filterValue" name="filterValue" class="p-2 border rounded">
+                <option value="">Sélectionnez une valeur</option>
+
+                <?php if ($filterType === 'speciality'): ?>
+                    <?php foreach ($specialities as $speciality): ?>
+                        <option value="<?= $speciality['id_speciality']; ?>" <?= $filterValue == $speciality['id_speciality'] ? 'selected' : ''; ?>>
+                            <?= $speciality['description']; ?>
+                        </option>
+                    <?php endforeach; ?>
+                <?php elseif ($filterType === 'etablishment'): ?>
+                    <?php foreach ($etablishments as $etablishment): ?>
+                        <option value="<?= $etablishment['id_etablishment']; ?>" <?= $filterValue == $etablishment['id_etablishment'] ? 'selected' : ''; ?>>
+                            <?= $etablishment['name']; ?>
+                        </option>
+                    <?php endforeach; ?>
+                <?php elseif ($filterType === 'patient'): ?>
+                    <?php foreach ($patients as $patient): ?>
+                        <option value="<?= $patient['id_patient']; ?>" <?= $filterValue == $patient['id_patient'] ? 'selected' : ''; ?>>
+                            <?= $patient['first_name'] . ' ' . $patient['last_name']; ?>
+                        </option>
+                    <?php endforeach; ?>
+                <?php elseif ($filterType === 'practitioner'): ?>
+                    <?php foreach ($practitioners as $practitioner): ?>
+                        <option value="<?= $practitioner['id_practitioner']; ?>" <?= $filterValue == $practitioner['id_practitioner'] ? 'selected' : ''; ?>>
+                            <?= $practitioner['first_name'] . ' ' . $practitioner['last_name']; ?>
+                        </option>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+
+            </select>
+
+            <button type="submit" class="bg-[#117ACA] text-white rounded p-2 hover:bg-[#00264C] transition duration-200">
+                Appliquer
+            </button>
+        </form>
     </div>
 
     <div id='calendar'></div>
-
-    <?php if (!empty($pager)): ?>
-        <div class="pagination mt-4">
-            <?= $pager ?>
-        </div>
-    <?php endif; ?>
 
     <div id="appointmentModal" class="fixed inset-0 hidden bg-black bg-opacity-50 z-50">
         <div class="flex justify-center items-center h-screen">
@@ -92,7 +133,6 @@
 			eventColor: '#3788d8',
 			eventTextColor: '#ffffff',
 			nowIndicator: true,
-			editable: true,
 			selectable: true,
 			dayMaxEvents: true,
 			displayEventTime: false
@@ -103,4 +143,31 @@
 			document.getElementById('appointmentModal').classList.add('hidden');
 		});
 	});
+
+	function updateFilterValues() {
+		const filterType = document.getElementById("filterType").value;
+		const filterValue = document.getElementById("filterValue");
+
+		filterValue.innerHTML = '<option value="">Sélectionnez une valeur</option>';
+
+        <?php if (isset($specialities, $etablishments, $patients, $practitioners)) : ?>
+		if (filterType === "speciality") {
+            <?php foreach ($specialities as $speciality): ?>
+			filterValue.innerHTML += `<option value="<?= $speciality['id_speciality']; ?>"><?= $speciality['description']; ?></option>`;
+            <?php endforeach; ?>
+		} else if (filterType === "etablishment") {
+            <?php foreach ($etablishments as $etablishment): ?>
+			filterValue.innerHTML += `<option value="<?= $etablishment['id_etablishment']; ?>"><?= $etablishment['name']; ?></option>`;
+            <?php endforeach; ?>
+		} else if (filterType === "patient") {
+            <?php foreach ($patients as $patient): ?>
+			filterValue.innerHTML += `<option value="<?= $patient['id_patient']; ?>"><?= $patient['first_name'] . ' ' . $patient['last_name']; ?></option>`;
+            <?php endforeach; ?>
+		} else if (filterType === "practitioner") {
+            <?php foreach ($practitioners as $practitioner): ?>
+			filterValue.innerHTML += `<option value="<?= $practitioner['id_practitioner']; ?>"><?= $practitioner['first_name'] . ' ' . $practitioner['last_name']; ?></option>`;
+            <?php endforeach; ?>
+		}
+        <?php endif; ?>
+	}
 </script>

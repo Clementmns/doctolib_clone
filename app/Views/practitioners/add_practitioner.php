@@ -146,4 +146,40 @@
 			});
 		}
 	}
+
+	function addAvailability() {
+		const container = document.getElementById('availability-container');
+		const row = document.createElement('div');
+		row.className = "flex items-center space-x-4 bg-white border border-gray-300 rounded p-2 shadow-sm";
+
+		row.innerHTML =`
+			<div class="flex-1">
+				<label class="sr-only">Jour :</label>
+				<select name="day[]" class="border border-gray-300 rounded p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500">
+					<option value="Monday">Lundi</option>
+					<option value="Tuesday">Mardi</option>
+					<option value="Wednesday">Mercredi</option>
+					<option value="Thursday">Jeudi</option>
+					<option value="Friday">Vendredi</option>
+					<option value="Saturday">Samedi</option>
+					<option value="Sunday">Dimanche</option>
+				</select>
+			</div>
+		<div class="flex-1">
+			<label class="sr-only">Heure de début :</label>
+			<input type="time" name="start_time[]" required class="border border-gray-300 rounded p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500" />
+		</div>
+		<div class="flex-1">
+			<label class="sr-only">Heure de fin :</label>
+			<input type="time" name="end_time[]" required class="border border-gray-300 rounded p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500" />
+		</div>
+		<button type="button" onclick="removeAvailability(this)" class="bg-red-500 text-white rounded p-2 hover:bg-red-600 transition duration-200">Supprimer</button>
+		`;
+
+		container.appendChild(row);
+	}
+
+	function removeAvailability(button) {
+		button.parentElement.remove();
+	}
 </script>
