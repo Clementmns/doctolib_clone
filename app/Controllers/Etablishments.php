@@ -6,6 +6,10 @@ use App\Models\EtablishmentsModel;
 
 class Etablishments extends BaseController {
 
+    public function __construct() {
+        helper('form');  // Charger le helper 'form' pour les formulaires
+    }
+
     public function index(): void {
         $model = model(EtablishmentsModel::class);
 
@@ -35,19 +39,17 @@ class Etablishments extends BaseController {
 
     // Méthode pour afficher la vue d'ajout
     public function addView() {
-        helper('form');
-
         $data = [
             'title' => 'Ajouter un établissement',
+            // Si vous avez déjà saisi des données, elles peuvent être envoyées ici
+            'name' => old('name'),
+            'location' => old('location'),
+            'open_hour' => old('open_hour'),
         ];
 
-    echo view('templates/header', ['title' => 'Ajouter un établissement']);
-    echo view('etablishments/add_etablishments');
-    echo view('templates/footer');
-    
-
-
-
+        echo view('templates/header', ['title' => 'Ajouter un établissement']);
+        echo view('etablishments/add_etablishments', $data);
+        echo view('templates/footer');
     }
 
     // Méthode pour créer un nouvel établissement
@@ -61,11 +63,18 @@ class Etablishments extends BaseController {
             'open_hour' => 'required|max_length[50]', // Ajout de la validation pour open_hour
         ]);
 
+        // Si la validation échoue
         if (!$validation->withRequest($this->request)->run()) {
-            // En cas d'erreur de validation, retourner à la vue d'ajout avec les erreurs
-            return view('etablishments/add_etablishments', ['validation' => $validation]);
+            // Retourner à la vue d'ajout avec les erreurs et les données déjà saisies
+            return view('etablishments/add_etablishments', [
+                'validation' => $validation,
+                'name' => $this->request->getPost('name'),
+                'location' => $this->request->getPost('location'),
+                'open_hour' => $this->request->getPost('open_hour'),
+            ]);
         }
 
+        // Si la validation réussit, on sauvegarde les données dans la base de données
         $model = new EtablishmentsModel();
         $model->save([
             'name' => $this->request->getPost('name'),
