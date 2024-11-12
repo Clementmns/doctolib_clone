@@ -52,7 +52,6 @@
 		const calendarEl = document.getElementById('calendar');
 		const calendar = new FullCalendar.Calendar(calendarEl, {
 			initialView: 'dayGridMonth',
-			initialDate: appointments[0].date,
 			locale: 'fr',
 			events: transformedAppointments,
 			eventClick: function(info) {

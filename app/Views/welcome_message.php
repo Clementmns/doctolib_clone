@@ -46,12 +46,4 @@
             <li class="w-[200px] h-[200px] border rounded-3xl flex justify-center items-center"><a href="" class="hover:underline text-blue-600">Consultation des rdv d'un praticien</a></li>
         </ul>
     </li>
-    <li>
-        <p>Modifications de la base de donnée</p>
-        <ul class="flex justify-around">
-            <li class="w-[200px] h-[200px] border rounded-3xl flex justify-center items-center"><a href="" class="hover:underline text-blue-600">Modifier les données temporelles d'un rendez-vous</a></li>
-            <li class="w-[200px] h-[200px] border rounded-3xl flex justify-center items-center"><a href="" class="hover:underline text-blue-600">Modifier le praticien du rendez-vous</a></li>
-            <li class="w-[200px] h-[200px] border rounded-3xl flex justify-center items-center"><a href="" class="hover:underline text-blue-600">Annuler un rendez-vous</a></li>
-        </ul>
-    </li>
 </ul>
