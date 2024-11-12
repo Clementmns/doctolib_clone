@@ -18,6 +18,10 @@ $routes->post('patients/create', 'Patients::create');
 $routes->get('etablishments', 'Etablishments::index');
 $routes->get('etablishments/new', 'Etablishments::addView');
 $routes->post('etablishments/create', 'Etablishments::create');
+$routes->get('etablishments/edit/(:num)', 'Etablishments::edit/$1'); 
+$routes->post('etablishments/update/(:num)', 'Etablishments::update/$1'); 
+
+
 
 
 

@@ -4,44 +4,63 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= esc($title) ?></title>
+    <!-- Lien vers Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-<button><a href="etablishments/new">Ajouter un établissement</a></button>
+<body class="bg-gray-100 font-sans">
 
-    <table border="1" cellpadding="10" cellspacing="0">
-        <thead>
-            <tr>
-                <th>Nom de l'établissement</th>
-                <th>Emplacement</th>
-                <th>Heures d'ouverture</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php if (!empty($etablishments) && is_array($etablishments)): ?>
-                <?php foreach ($etablishments as $etablishment): ?>
-                    <tr>
-                        <td><?= esc($etablishment['name']) ?></td>
-                        <td><?= esc($etablishment['location']) ?></td>
-                        <td><?= esc($etablishment['open_hour']) ?></td>
-                    </tr>
-                <?php endforeach; ?>
-            <?php else: ?>
-                <tr>
-                    <td colspan="3">Aucun établissement trouvé.</td>
-                </tr>
-            <?php endif; ?>
-        </tbody>
-    </table>
+    <!-- Section principale -->
+    <div class="container mx-auto p-6">
 
-    <!-- Pagination -->
-    <?php if (!empty($pager)): ?>
-        <div class="pagination">
-            <?= $pager ?>
+        <!-- Titre et bouton d'ajout -->
+        <div class="flex justify-between items-center mb-6">
+            <h1 class="text-3xl font-semibold text-blue-600"><?= esc($title) ?></h1>
+            <a href="etablishments/new">
+                <button class="bg-blue-500 text-white py-2 px-6 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400">Ajouter un établissement</button>
+            </a>
         </div>
-    <?php endif; ?>
 
-    <!-- Lien pour ajouter un nouvel établissement -->
-    <a href="<?= base_url('etablishments/new'); ?>"><button>Ajouter un établissement</button></a>
+        <!-- Tableau des établissements -->
+        <table class="w-full table-auto border-collapse border border-gray-300 mb-6">
+            <thead>
+                <tr class="bg-blue-100">
+                    <th class="px-6 py-3 text-left text-blue-600">Nom de l'établissement</th>
+                    <th class="px-6 py-3 text-left text-blue-600">Emplacement</th>
+                    <th class="px-6 py-3 text-left text-blue-600">Heures d'ouverture</th>
+                    <th class="px-6 py-3 text-left text-blue-600">Action</th> <!-- Colonne "Action" pour modifier -->
+                </tr>
+            </thead>
+            <tbody>
+                <?php if (!empty($etablishments) && is_array($etablishments)): ?>
+                    <?php foreach ($etablishments as $etablishment): ?>
+                        <tr class="border-b hover:bg-gray-50">
+                            <td class="px-6 py-4"><?= esc($etablishment['name']) ?></td>
+                            <td class="px-6 py-4"><?= esc($etablishment['location']) ?></td>
+                            <td class="px-6 py-4"><?= esc($etablishment['open_hour']) ?></td>
+                            <td class="px-6 py-4">
+    <a href="<?= base_url('etablishments/edit/' . $etablishment['id_etablishment']) ?>" class="text-blue-500 hover:text-blue-700">Modifier</a>
+</td>
+
+                        </tr>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <tr>
+                        <td colspan="4" class="px-6 py-4 text-center text-gray-600">Aucun établissement trouvé.</td>
+                    </tr>
+                <?php endif; ?>
+            </tbody>
+        </table>
+
+        <!-- Pagination -->
+        <?php if (!empty($pager)): ?>
+            <div class="flex justify-center mt-4">
+                <div class="pagination">
+                    <?= $pager ?>
+                </div>
+            </div>
+        <?php endif; ?>
+        
+    </div>
     
 </body>
 </html>
