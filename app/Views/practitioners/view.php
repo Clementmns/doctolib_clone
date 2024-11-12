@@ -30,6 +30,7 @@
                 <th class="border border-gray-300 px-4 py-2">Indisponibilité</th>
                 <th class="border border-gray-300 px-4 py-2">Spécialités</th>
                 <th class="border border-gray-300 px-4 py-2">Établissement</th>
+                <th class="border border-gray-300 px-4 py-2">Rendez-vous</th>
             </tr>
         </thead>
         <tbody>
@@ -73,6 +74,13 @@
                         </td>
                         <td class="border border-gray-300 px-4 py-2">
                             <?= !empty($practitioner['establishments']) ? implode(', ', esc($practitioner['establishments'])) : 'Aucun établissement assigné' ?>
+                        </td>
+                        <td class="border border-gray-300 px-4 py-2 text-center">
+                            <a href="practitioners/appointments?id_practitioner=<?= esc($practitioner['id_practitioner']) ?>">
+                                <button class="bg-[#117ACA] text-white rounded p-1 hover:bg-[#00264C] transition duration-200">
+                                    Voir les rendez-vous
+                                </button>
+                            </a>
                         </td>
                     </tr>
                 <?php endforeach; ?>
