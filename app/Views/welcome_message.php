@@ -35,16 +35,8 @@
         </ul>
     </li>
     <li>
-        <p>Alimentations simples de la BDD (tables sans clés étrangères)</p>
-        <ul class="flex justify-around">
-            <li class="w-[200px] h-[200px] border rounded-3xl flex justify-center items-center"><a href=" practitioners/new" class="hover:underline text-blue-600">Création d'un praticien</a></li>
-            <li class="w-[200px] h-[200px] border rounded-3xl flex justify-center items-center"><a href="etablishments/new" class=" hover:underline text-blue-600">Création d'un établissement</a></li>
-        </ul>
-    </li>
-    <li>
         <p>Alimentations plus complexes de la BDD</p>
         <ul class="flex justify-around">
-            <li class="w-[200px] h-[200px] border rounded-3xl flex justify-center items-center"><a href="patients/create" class=" hover:underline text-blue-600">Création d'un patient</a></li>            <li class="w-[200px] h-[200px] border rounded-3xl flex justify-center items-center"><a href="" class="hover:underline text-blue-600">Définir le lieu de pratique d'un praticien donné</a></li>
             <li class="w-[200px] h-[200px] border rounded-3xl flex justify-center items-center"><a href="" class="hover:underline text-blue-600">Création d'un rendez-vous entre un patient et un praticien</a></li>
         </ul>
     </li>
