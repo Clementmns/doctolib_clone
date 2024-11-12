@@ -49,4 +49,9 @@ class PatientsModel extends Model
 
         return $builder->countAllResults();
     }
+
+    public function getPatientById($id)
+    {
+        return $this->where('id_patient', $id)->first();
+    }
 }
