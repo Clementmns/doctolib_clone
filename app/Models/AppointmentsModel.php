@@ -28,4 +28,13 @@ class AppointmentsModel extends Model
 
         return $results;
     }
+
+    public function getAllAppointments($page = 1, $perPage = 10)
+    {
+        $offset = ($page - 1) * $perPage;
+
+        return $this->orderBy('date', 'ASC')
+            ->limit($perPage, $offset)
+            ->find();
+    }
 }

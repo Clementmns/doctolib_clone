@@ -22,16 +22,7 @@
             </li>
         </ul>
         <ul class="flex flex-col items-center">
-            <li class="w-[50vw]"><h2 class="text-2xl font-bold text-white">Vivez <span class="text-[#CCF2FF]">en meilleur santé</span></h2></li>
-            <li class="w-[50vw]">
-                <div class="w-full flex gap-4 border border-gray-300 rounded-full p-1 bg-white">
-                    <div class="w-full flex">
-                        <input type="text" class="p-4 rounded-l-full w-full border-r border-gray-300" placeholder="Nom, spécialité, établissement,...">
-                        <input type="text" class="p-4 w-full" placeholder="Où ?">
-                    </div>
-                    <button class="text-white rounded-r-full p-4 bg-[#00264C]">Rechercher</button>
-                </div>
-            </li>
+            <a href="appointments/" class="relative hover:underline text-white z-10 text-3xl">Voir tous les rendez-vous</a>
         </ul>
     </li>
     <li>
