@@ -15,9 +15,9 @@ $routes->get('patients/create', 'Patients::create');
 $routes->post('patients/create', 'Patients::create');
 
 // ETABLISSEMENTS
-$routes->get('etablishments', 'Etablishments::index'); // Lister les établissements
-$routes->get('etablishments/new', 'Etablishments::addView'); // Afficher la vue pour ajouter un établissement
-$routes->post('etablishments/create', 'Etablishments::create');  // Soumettre le formulaire pour créer un établissement
+$routes->get('etablishments', 'Etablishments::index');
+$routes->get('etablishments/new', 'Etablishments::addView');
+$routes->post('etablishments/create', 'Etablishments::create');
 
 
 
