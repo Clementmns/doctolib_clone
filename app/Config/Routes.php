@@ -38,3 +38,5 @@ $routes->post('practitioners/delete/(:segment)', 'Practitioner::delete/$1');
 
 //APPPOINTMENT
 $routes->get('patients/appointment', 'Appointment::index');
+$routes->post('appointment/update', 'Appointment::update');
+$routes->post('appointment/delete', 'Appointment::delete');
