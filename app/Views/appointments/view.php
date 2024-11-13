@@ -51,6 +51,7 @@
                 Appliquer
             </button>
         </form>
+        <a class="bg-[#117ACA] text-white rounded p-2 hover:bg-[#00264C] transition duration-200" href="<?= base_url('appointment/new'); ?>">Ajouter un rdv</a>
     </div>
 
     <div id='calendar'></div>

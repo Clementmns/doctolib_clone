@@ -1,17 +1,18 @@
 <?php
+
 namespace App\Controllers;
 
 use App\Models\SpecialitiesModel;
 
 class Specialities extends BaseController
 {
-    // Méthode pour afficher la liste des spécialités
     public function index(): void
     {
         $model = model(SpecialitiesModel::class);
-        $perPage = 10;
-        $specialities = $model->paginate($perPage);
-        $pager = $model->pager;
+
+        $perPage = 10; // Nombre d'éléments par page
+        $specialities = $model->paginate($perPage); // Récupère les spécialités paginées
+        $pager = $model->pager; // Génère la pagination
 
         $data = [
             'specialities' => $specialities,
@@ -24,20 +25,41 @@ class Specialities extends BaseController
         echo view('templates/footer', $data);
     }
 
-    // Méthode pour afficher le formulaire d'ajout de spécialité
-    public function addView()
+    // Méthode pour afficher le formulaire d'édition d'une spécialité
+    public function edit($id): void
     {
+        $model = model(SpecialitiesModel::class);
+        $speciality = $model->find($id);
+
+        if (!$speciality) {
+            throw new \CodeIgniter\Exceptions\PageNotFoundException("Spécialité avec l'id $id non trouvée");
+        }
+
         $data = [
-            'title' => 'Ajouter une spécialité',
-            'description' => old('description'),
+            'speciality' => $speciality,
+            'title' => "Modifier la spécialité",
+            'validation' => \Config\Services::validation(),
         ];
 
         echo view('templates/header', $data);
-        echo view('specialities/add', $data);
+        echo view('specialities/edit', $data); // Vue pour le formulaire de modification
         echo view('templates/footer');
     }
 
-    // Méthode pour enregistrer une nouvelle spécialité
+    // Méthode pour afficher le formulaire d'ajout d'une spécialité
+    public function addView(): void
+    {
+        $data = [
+            'title' => 'Ajouter une spécialité',
+            'validation' => \Config\Services::validation(),
+        ];
+
+        echo view('templates/header', $data);
+        echo view('specialities/add', $data); // Vue pour le formulaire d'ajout
+        echo view('templates/footer');
+    }
+
+    // Méthode pour ajouter une spécialité
     public function create()
     {
         $validation = \Config\Services::validation();
@@ -47,20 +69,40 @@ class Specialities extends BaseController
             'description' => 'required|max_length[255]',
         ]);
 
-        // Si la validation échoue
         if (!$validation->withRequest($this->request)->run()) {
             return view('specialities/add', [
                 'validation' => $validation,
-                'description' => $this->request->getPost('description'),
+                'title' => 'Ajouter une spécialité',
             ]);
         }
 
-        // Si la validation réussit, sauvegarder la nouvelle spécialité
         $model = model(SpecialitiesModel::class);
         $model->save([
             'description' => $this->request->getPost('description'),
         ]);
 
         return redirect()->to(site_url('specialities'))->with('success', 'Spécialité ajoutée avec succès');
+    }
+
+    // Méthode pour mettre à jour une spécialité
+    public function update($id)
+    {
+        $validation = \Config\Services::validation();
+
+        // Définir les règles de validation
+        $validation->setRules([
+            'description' => 'required|max_length[255]',
+        ]);
+
+        if (!$validation->withRequest($this->request)->run()) {
+            return redirect()->to(site_url('specialities/edit/' . $id))->withInput()->with('validation', $validation);
+        }
+
+        $model = model(SpecialitiesModel::class);
+        $model->update($id, [
+            'description' => $this->request->getPost('description'),
+        ]);
+
+        return redirect()->to(site_url('specialities'))->with('success', 'Spécialité modifiée avec succès');
     }
 }
