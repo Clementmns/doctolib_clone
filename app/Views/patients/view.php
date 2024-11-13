@@ -40,7 +40,7 @@
                         <td class="border border-gray-300 px-4 py-2"><?= esc($patient['email']) ?></td>
                         <td class="border border-gray-300 px-4 py-2"><?= esc($patient['birth_date']) ?></td>
                         <td class="border border-gray-300 px-4 py-2 text-center">
-                            <a href="patients/appointment?id_patient=<?= esc($patient['id_patient']) ?>">
+                            <a href="patients/appointment?id_patient=<?= esc($patient['id_patient']) ?>" class="text-center">
                                 <button class="bg-[#117ACA] text-white rounded p-1 hover:bg-[#00264C] transition duration-200">
                                     Voir les rendez-vous
                                 </button>
