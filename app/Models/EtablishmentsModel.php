@@ -18,7 +18,12 @@ class EtablishmentsModel extends Model {
                     ->find();
     }
 
-    public function addEstablishmentToPractitioner($practitioner_id, $establishment_id): bool {
+    public function getEtablishmentById($id) {
+        return $this->where('id_etablishment', $id)->first();
+    }
+
+    public function addEstablishmentToPractitioner($practitioner_id, $establishment_id): bool
+    {
         $data = [
             'id_practitioner' => $practitioner_id,
             'id_etablishment' => $establishment_id,
@@ -33,7 +38,8 @@ class EtablishmentsModel extends Model {
             ->delete();
     }
 
-    public function getEstablishmentsByPractitionerId($practitioner_id): array {
+    public function getEstablishmentByPractitionerId($practitioner_id): array
+    {
         return $this->db->table('pra_etab')
             ->join('etablishment', 'pra_etab.id_etablishment = etablishment.id_etablishment')
             ->where('pra_etab.id_practitioner', $practitioner_id)
@@ -41,4 +47,16 @@ class EtablishmentsModel extends Model {
             ->get()
             ->getResultArray();
     }
+
+    public function getEstablishmentsBySpeciality($speciality_id): array
+    {
+        return $this->db->table('pra_spe')
+            ->join('pra_etab', 'pra_spe.id_practitioner = pra_etab.id_practitioner')
+            ->join('etablishment', 'pra_etab.id_etablishment = etablishment.id_etablishment')
+            ->where('pra_spe.id_speciality', $speciality_id)
+            ->select('etablishment.*')
+            ->get()
+            ->getResultArray();
+    }
+
 }

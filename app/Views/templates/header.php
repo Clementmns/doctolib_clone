@@ -12,6 +12,11 @@
     </script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
+    <style>
+        .fc-event-main {
+            cursor: pointer;
+        }
+    </style>
 </head>
 
 <body>
@@ -23,6 +28,7 @@
 
         <div class="w-[40vw] flex justify-evenly items-center">
             <a href="<?= base_url(''); ?>" class="hover:underline text-white">Accueil</a>
+            <a href="<?= base_url('specialities/'); ?>" class="hover:underline text-white">Spécialités</a>
             <a href="<?= base_url('patients/'); ?>" class="hover:underline text-white">Patients</a>
             <a href="<?= base_url('etablishments/'); ?>" class="hover:underline text-white">Établissements</a>
             <a href="<?= base_url('practitioners/'); ?>" class="hover:underline text-white">Praticien</a>
