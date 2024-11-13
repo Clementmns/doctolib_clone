@@ -4,15 +4,15 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class SpecialitiesModel extends Model
+class SpecialityModel extends Model
 {
-    protected $table = 'speciality';
-    protected $primaryKey = 'id_speciality';
-    protected $allowedFields = ['description'];
+    protected $table      = 'speciality';      // Nom de la table
+    protected $primaryKey = 'id_speciality';   // Clé primaire
 
-    public function getSpecialities($perPage = 10): ?array
-    {
-        return $this->orderBy('description', 'ASC')
-            ->paginate($perPage);
-    }
+    protected $allowedFields = ['description']; // Champs autorisés à être insérés
+
+    protected $returnType     = 'array';
+    protected $useTimestamps  = true;          // Si vous voulez utiliser les timestamps
+    protected $createdField   = 'created_at';  // Le champ pour la date de création
+    protected $updatedField   = 'updated_at';  // Le champ pour la date de mise à jour
 }
