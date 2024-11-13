@@ -10,11 +10,6 @@ class SpecialityModel extends Model
     protected $primaryKey = 'id_speciality';
     protected $allowedFields = ['description'];
 
-    protected $returnType     = 'array';
-    protected $useTimestamps  = true;          // Si vous voulez utiliser les timestamps
-    protected $createdField   = 'created_at';  // Le champ pour la date de création
-    protected $updatedField   = 'updated_at';  // Le champ pour la date de mise à jour
-
     public function getSpecialitiesByEstablishmentId($establishment_id): array
     {
         //there is pra_spe table for the relationship between practitioner and speciality
